@@ -30,7 +30,7 @@ require_once 'header.inc.php';
     }
 
 	// Prepare SQL Statement
-    $sql = "SELECT CustomerNumber,CustomerName FROM customer ORDER BY CustomerName";
+    $sql = "SELECT Person.firstName, Person.lastName FROM Person P INNER JOIN Missing_Person_Event_MissingPerson MP on P.personID = MP.personID ORDER BY Person.lastName";
     $stmt = $conn->stmt_init();
     if (!$stmt->prepare($sql)) {
         echo "failed to prepare";
@@ -41,10 +41,10 @@ require_once 'header.inc.php';
         $stmt->execute();
 		
 		// Loop Through Result
-        $stmt->bind_result($customerNumber,$customerName);
+        $stmt->bind_result($Person.personID,$Person.firstName,$Person.lastName);
         echo "<ul>";
         while ($stmt->fetch()) {
-            echo '<li><a href="show_customer.php?id='  . $customerNumber . '">' . $customerName . '</a></li>';
+            echo '<li><a href="show_missing_children.php?id='  . $Person.personID . '">' . $Person.firstName . '</a></li>';
         }
         echo "</ul>";
     }
