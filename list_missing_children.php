@@ -10,7 +10,7 @@ require_once 'config.inc.php';
 ?>
 <html>
 <head>
-    <title>Sample PHP Database Program</title>
+    <title>Missing Children Database</title>
     <link rel="stylesheet" href="base.css">
 </head>
 <body>
@@ -18,7 +18,7 @@ require_once 'config.inc.php';
 require_once 'header.inc.php';
 ?>
 <div>
-    <h2>Customer List</h2>
+    <h2>List of Missing Children</h2>
     <?php
     // Create connection
     $conn = new mysqli($servername, $username, $password, $database, $port);
