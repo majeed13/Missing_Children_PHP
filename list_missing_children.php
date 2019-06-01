@@ -22,7 +22,6 @@ require_once 'header.inc.php';
     <?php
     // Create connection
     $conn = new mysqli($servername, $username, $password, $database, $port);
-    //$conn = new mysqli("vergil.u.washington.edu", "root", "Debohar1", "Point_Of_Sale", 23007);
 
     // Check connection
     if ($conn->connect_error) {
@@ -30,7 +29,7 @@ require_once 'header.inc.php';
     }
 
 	// Prepare SQL Statement
-    $sql = "SELECT Person.firstName, Person.lastName FROM Person P INNER JOIN Missing_Person_Event_MissingPerson MP on P.personID = MP.personID ORDER BY Person.lastName";
+    $sql = "SELECT P.personID, P.firstName, P.lastName FROM Person P INNER JOIN Missing_Person_Event_MissingPerson MP on P.personID = MP.personID ORDER BY P.lastName";
     $stmt = $conn->stmt_init();
     if (!$stmt->prepare($sql)) {
         echo "failed to prepare";
@@ -41,10 +40,10 @@ require_once 'header.inc.php';
         $stmt->execute();
 		
 		// Loop Through Result
-        $stmt->bind_result($Person.personID,$Person.firstName,$Person.lastName);
+        $stmt->bind_result($personID,$firstName,$lastName);
         echo "<ul>";
         while ($stmt->fetch()) {
-            echo '<li><a href="show_missing_children.php?id='  . $Person.personID . '">' . $Person.firstName . '</a></li>';
+            echo '<li><a href="show_missing_children.php?id='  . $personID . '">' . $firstName . " " . $lastName . '</a></li>';
         }
         echo "</ul>";
     }
