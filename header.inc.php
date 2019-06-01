@@ -13,5 +13,5 @@
     <a href="list_missing_children.php">List Missing Children</a>
     //<a href="list_products.php">List Products</a>
 </div></div>
-<h1>Sample PHP Database Program</h1>
+<h1>Missing Children Database Program</h1>
 
