@@ -60,7 +60,7 @@ require_once 'header.inc.php';
         $stmt->bind_result($personID, $firstName,$lastName,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
         echo "<div>";
         while ($stmt->fetch()) {
-            echo '<a href="show_customer.php?id='  . $id . '">' . 'Name: ' . $firstName . '</a>' . ' ' . $lastName . '<br>' . 'Sex: ' . $sex . '<br>' . 'Ethnicity: ' . $ethnicity . '<br>' . 'Date of Birth: ' . $date . '<br>' . 'Height when missing (inches): ' . $heightWhenMissingInches . '<br>' . 'Weight when missing (pounds)' . $mostRecentWeightLbs . '<br>' . 'Eye Color: ' . $eyeColor . '<br>' . 'Hair Color: ' . $hairColor . '<br>' . 'Contact Agency: ' . $contactAgency . '<br>' . 'Contact Phone Number: ' . $phoneNumber . '<br>' . 'Additional Details: ' . $details;
+            echo '<a href="show_customer.php?id='  . $id . '">' . 'Name: ' . $firstName . '</a>' . ' ' . $lastName . '<brSex: >' . 'Sex: ' . $sex . '<br>' . 'Ethnicity: ' . $ethnicity . '<br>' . 'Date of Birth: ' . $date . '<br>' . 'Height when missing (inches): ' . $heightWhenMissingInches . '<br>' . 'Weight when missing (pounds)' . $mostRecentWeightLbs . '<br>' . 'Eye Color: ' . $eyeColor . '<br>' . 'Hair Color: ' . $hairColor . '<br>' . 'Contact Agency: ' . $contactAgency . '<br>' . 'Contact Phone Number: ' . $phoneNumber . '<br>' . 'Additional Details: ' . $details;
         } 
         echo "</div>";
     ?>
