@@ -82,10 +82,10 @@ require_once 'header.inc.php';
         $stmt->bind_param('s',$id);
         $stmt->execute();
         $stmt->bind_result($personID,$firstName,$lastName,$age,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
-        if ($heightWhenMissingInches === null) {
+        if(empty($heightWhenMissingInches)) {
             $heightWhenMissingInches = "Info Not Available";
         }
-        if ($mostRecentWeightLbs === null) {
+        if(empty($mostRecentWeightLbs)) {
             $mostRecentWeightLbs = "Info Not Available";
         }
         ?>
