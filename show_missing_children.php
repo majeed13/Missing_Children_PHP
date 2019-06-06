@@ -43,8 +43,7 @@ require_once 'header.inc.php';
     }
 
 	// Prepare SQL using Parameterized Form (Safe from SQL Injections)
-    $sql = "SELECT CustomerNumber,CustomerName,StreetAddress,CityName,StateCode,PostalCode FROM customer C " .
-        "INNER JOIN address A ON C.defaultAddressID = A.addressID WHERE CustomerNumber = ?";
+    $sql = "SELECT P.firstName, P.lastName, P.sex, P.ethnicity, P.date, P.heightWhenMissingInches, P.mostRecentWeightLbs, P.hairColor, MP.contactAgency, MP.phoneNumber, MP.details FROM Person P INNER JOIN Missing_Person_Event_MissingPerson MP on P.personID = MP.personID";
     $stmt = $conn->stmt_init();
     if (!$stmt->prepare($sql)) {
         echo "failed to prepare";
