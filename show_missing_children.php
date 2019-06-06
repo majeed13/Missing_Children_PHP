@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Mustafa
+ * User: Mustafa, Anthony, Bo
  * Date: 6/01/2019
  * Time: 11:48 AM
  */
@@ -23,7 +23,7 @@ if ($id === null) {
 ?>
 <html>
 <head>
-    <title>Sample PHP Database Program</title>
+    <title>Missing Children Database</title>
     <link rel="stylesheet" href="base.css">
 </head>
 <body>
@@ -43,7 +43,7 @@ require_once 'header.inc.php';
     }
 
 	// Prepare SQL using Parameterized Form (Safe from SQL Injections)
-    $sql = "SELECT P.firstName, P.lastName, P.sex, P.ethnicity, P.date, P.heightWhenMissingInches, P.mostRecentWeightLbs, P.eyeColor, P.hairColor, MP.contactAgency, MP.phoneNumber, MP.details FROM Person P INNER JOIN Missing_Person_Event_MissingPerson MP on P.personID = MP.personID";
+    $sql = "SELECT P.firstName, P.lastName, P.sex, P.ethnicity, P.date, P.heightWhenMissingInches, P.mostRecentWeightLbs, P.eyeColor, P.hairColor, MP.contactAgency, MP.phoneNumber, MP.details FROM Person P " . "INNER JOIN Missing_Person_Event_MissingPerson MP ON P.personID = MP.personID WHERE P.personID = ?";
     $stmt = $conn->stmt_init();
     if (!$stmt->prepare($sql)) {
         echo "failed to prepare";
@@ -60,7 +60,7 @@ require_once 'header.inc.php';
         $stmt->bind_result($firstName,$lastName,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
         echo "<div>";
         while ($stmt->fetch()) {
-            echo '<a href="show_customer.php?id='  . $firstName . '">' . $lastName . '</a><br>' .
+            echo '<a href="show_customer.php?id='  . $id . '">' . $lastName . '</a><br>' .
              $sex . ',' . $ethnicity . '  ' . $date;
         }
         echo "</div>";
