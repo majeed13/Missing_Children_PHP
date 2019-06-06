@@ -51,7 +51,7 @@ require_once 'header.inc.php';
     else {
 		
 		// Bind Parameters from User Input
-        $stmt->bind_param('s',$id);
+        $stmt->bind_param('sss',$id);
 		
 		// Execute the Statement
         $stmt->execute();
