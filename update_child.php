@@ -45,16 +45,16 @@ require_once 'header.inc.php';
 	// Check the Request is an Update from User -- Submitted via Form
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $age = $_POST['Age'];
-        if ($customerName === null)
-            echo "<div><i>Specify a new name</i></div>";
+        if ($age === null)
+            echo "<div><i>Specify a new name 1</i></div>";
         else if ($age === false)
-            echo "<div><i>Specify a new name</i></div>";
+            echo "<div><i>Specify a new name 2</i></div>";
         else if (trim($age) === "")
-            echo "<div><i>Specify a new name</i></div>";
+            echo "<div><i>Specify a new age 3</i></div>";
         else {
 			
             /* perform update using safe parameterized sql */
-            $sql = "UPDATE Person SET Age = ? WHERE CustomerNumber = ?";
+            $sql = "UPDATE Person SET age = ? WHERE personID = ?";
             $stmt = $conn->stmt_init();
             if (!$stmt->prepare($sql)) {
                 echo "failed to prepare";
@@ -73,7 +73,7 @@ require_once 'header.inc.php';
     /* Refresh the Data */
     //$sql = "SELECT CustomerNumber,CustomerName,StreetAddress,CityName,StateCode,PostalCode FROM customer C " .
       //  "INNER JOIN address A ON C.defaultAddressID = A.addressID WHERE CustomerNumber = ?";
-    $sql = "SELECT P.personID, P.firstName, P.lastName, P.sex, P.ethnicity, P.date, P.heightWhenMissingInches, P.mostRecentWeightLbs, P.eyeColor, P.hairColor, MP.contactAgency, MP.phoneNumber, MP.details FROM Person P " . "INNER JOIN Missing_Person_Event_MissingPerson MP ON P.personID = MP.personID WHERE P.personID = ?";
+    $sql = "SELECT P.personID, P.firstName, P.lastName, P.age, P.sex, P.ethnicity, P.date, P.heightWhenMissingInches, P.mostRecentWeightLbs, P.eyeColor, P.hairColor, MP.contactAgency, MP.phoneNumber, MP.details FROM Person P " . "INNER JOIN Missing_Person_Event_MissingPerson MP ON P.personID = MP.personID WHERE P.personID = ?";
     $stmt = $conn->stmt_init();
     if (!$stmt->prepare($sql)) {
         echo "failed to prepare";
@@ -81,17 +81,22 @@ require_once 'header.inc.php';
     else {
         $stmt->bind_param('s',$id);
         $stmt->execute();
-        $stmt->bind_result($customerNumber,$customerName,$streetName,$cityName,$stateCode,$postalCode);
+        $stmt->bind_result($personID,$firstName,$lastName,$age,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
+        if ($heightWhenMissingInches === null) {
+            $heightWhenMissingInches = "Info Not Available";
+        }
+        if ($mostRecentWeightLbs === null) {
+            $mostRecentWeightLbs = "Info Not Available";
+        }
         ?>
         <form method="post">
             <input type="hidden" name="id" value="<?= $id ?>">
         <?php
         while ($stmt->fetch()) {
-            echo '<a href="show_customer.php?id='  . $customerNumber . '">' . $customerName . '</a><br>' .
-             $streetName . ',' . $stateCode . '  ' . $postalCode;
+            echo 'Name: ' . '<a href="show_missing_children.php?id='  . $personID . '">' . $firstName . ' ' . $lastName . '</a>' .'<br>' . 'Age: ' . $age . '<br>'. 'Sex: ' . $sex . '<br>' . 'Ethnicity: ' . $ethnicity . '<br>' . 'Date of Birth: ' . $date . '<br>' . 'Height when missing (inches): ' . $heightWhenMissingInches . '<br>' . 'Weight when missing (pounds): ' . $mostRecentWeightLbs . '<br>' . 'Eye Color: ' . $eyeColor . '<br>' . 'Hair Color: ' . $hairColor . '<br>' . 'Contact Agency: ' . $contactAgency . '<br>' . 'Contact Phone Number: ' . $phoneNumber . '<br>' . 'Additional Details: ' . $details;
         }
     ?><br><br>
-            New Name: <input type="text" name="customerName">
+            New Age: <input type="text" name="Age">
             <button type="submit">Update</button>
         </form>
     <?php
