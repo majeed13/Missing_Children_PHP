@@ -60,9 +60,8 @@ require_once 'header.inc.php';
         $stmt->bind_result($firstName,$lastName,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
         echo "<div>";
         while ($stmt->fetch()) {
-            echo '<a href="show_customer.php?id='  . $id . '">' . $firstName . $lastName . '</a><br>' .
-             $sex . '</a><br>' . $ethnicity . '</a><br>' . $date . '</a><br>' . $heightWhenMissingInches . '</a><br>' . $mostRecentWeightLbs . '</a><br>' . $eyeColor . '</a><br>' . $hairColor . '</a><br>' . $contactAgency . '</a><br>' . $phoneNumber . '</a><br>' . $details;
-        }
+            echo '<a href="show_customer.php?id='  . $id . '">' . $firstName . '</a><br>' . $lastName . '<br>' . $sex . '<br>' . $ethnicity . '<br>' . $date . '<br>' . $heightWhenMissingInches . '<br>' . $mostRecentWeightLbs . '<br>' . $eyeColor . '<br>' . $hairColor . '<br>' . $contactAgency . '<br>' . $phoneNumber . '<br>' . $details;
+        } 
         echo "</div>";
     ?>
         <div>
