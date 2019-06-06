@@ -61,7 +61,7 @@ require_once 'header.inc.php';
         echo "<div>";
         while ($stmt->fetch()) {
             echo '<a href="show_customer.php?id='  . $id . '">' . $firstName . $lastName . '</a><br>' .
-             $sex . ',' . $ethnicity . '  ' . $date;
+             $sex . '</a><br>' . $ethnicity . '</a><br>' . $date . '</a><br>' . $heightWhenMissingInches . '</a><br>' . $mostRecentWeightLbs . '</a><br>' . $eyeColor . '</a><br>' . $hairColor . '</a><br>' . $contactAgency . '</a><br>' . $phoneNumber . '</a><br>' . $details;
         }
         echo "</div>";
     ?>
