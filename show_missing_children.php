@@ -60,9 +60,8 @@ require_once 'header.inc.php';
         $stmt->bind_result($personID, $firstName,$lastName,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
         echo "<div>";
         while ($stmt->fetch()) {
-            echo '<a href="show_nissing_children.php?id='  . $id . '">' . $lastName . '</a><br>' .
-             $sex . ',' . $ethnicity . '  ' . $date;
-        }
+            echo '<a href="show_customer.php?id='  . $id . '">' . $firstName . '</a><br>' . $lastName . '<br>' . $sex . '<br>' . $ethnicity . '<br>' . $date . '<br>' . $heightWhenMissingInches . '<br>' . $mostRecentWeightLbs . '<br>' . $eyeColor . '<br>' . $hairColor . '<br>' . $contactAgency . '<br>' . $phoneNumber . '<br>' . $details;
+        } 
         echo "</div>";
     ?>
         <div>
