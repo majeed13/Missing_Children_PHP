@@ -60,7 +60,7 @@ require_once 'header.inc.php';
         $stmt->bind_result($firstName,$lastName,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
         echo "<div>";
         while ($stmt->fetch()) {
-            echo '<a href="show_customer.php?id='  . $id . '">' . $lastName . '</a><br>' .
+            echo '<a href="show_customer.php?id='  . $id . '">' . $firstName . $lastName . '</a><br>' .
              $sex . ',' . $ethnicity . '  ' . $date;
         }
         echo "</div>";
