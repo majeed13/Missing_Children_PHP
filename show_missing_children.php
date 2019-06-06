@@ -43,7 +43,7 @@ require_once 'header.inc.php';
     }
 
 	// Prepare SQL using Parameterized Form (Safe from SQL Injections)
-    $sql = "SELECT P.firstName, P.lastName, P.sex, P.ethnicity, P.date, P.heightWhenMissingInches, P.mostRecentWeightLbs, P.eyeColor, P.hairColor, MP.contactAgency, MP.phoneNumber, MP.details FROM Person P " . "INNER JOIN Missing_Person_Event_MissingPerson MP ON P.personID = MP.personID WHERE P.personID = ?";
+    $sql = "SELECT P.personID, P.firstName, P.lastName, P.sex, P.ethnicity, P.date, P.heightWhenMissingInches, P.mostRecentWeightLbs, P.eyeColor, P.hairColor, MP.contactAgency, MP.phoneNumber, MP.details FROM Person P " . "INNER JOIN Missing_Person_Event_MissingPerson MP ON P.personID = MP.personID WHERE P.personID = ?";
     $stmt = $conn->stmt_init();
     if (!$stmt->prepare($sql)) {
         echo "failed to prepare";
@@ -57,7 +57,7 @@ require_once 'header.inc.php';
         $stmt->execute();
 		
 		// Process Results Using Cursor
-        $stmt->bind_result($firstName,$lastName,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
+        $stmt->bind_result($personID, $firstName,$lastName,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
         echo "<div>";
         while ($stmt->fetch()) {
             echo '<a href="show_customer.php?id='  . $id . '">' . $firstName . '</a><br>' . $lastName . '<br>' . $sex . '<br>' . $ethnicity . '<br>' . $date . '<br>' . $heightWhenMissingInches . '<br>' . $mostRecentWeightLbs . '<br>' . $eyeColor . '<br>' . $hairColor . '<br>' . $contactAgency . '<br>' . $phoneNumber . '<br>' . $details;
@@ -65,7 +65,7 @@ require_once 'header.inc.php';
         echo "</div>";
     ?>
         <div>
-            <a href="update_customer.php?id=<?= $customerNumber ?>">Update Customer</a>
+            <a href="update_child.php?id=<?= $personID ?>">Update Child Age</a>
         </div>
     <?php
     }
