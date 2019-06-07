@@ -11,7 +11,7 @@
 <div class="topnav">
     <a href="index.php">Home</a>
     <a href="list_missing_children.php">List Missing Children</a>
-    //<a href="partial_list.php">List Missing Children with letter 'a' in their first name</a>
+    <a href="partial_list.php">List Missing Children with letter 'a' in their first name</a>
 </div></div>
 <h1>Missing Children Database Program</h1>
 

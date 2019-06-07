@@ -42,7 +42,7 @@ require_once 'header.inc.php';
 		// Process Results using Cursor
         $stmt->bind_result($personID,$firstName,$lastName);
         while ($stmt->fetch()) {
-            echo "<p>" . $firstName . " " . $lastName "</p>";
+            echo '<li>' $firstName . " " . $lastName '</li>';
         }
     }
 
