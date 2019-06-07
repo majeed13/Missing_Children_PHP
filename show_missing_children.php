@@ -41,6 +41,23 @@ require_once 'header.inc.php';
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+    
+    // print the image of the person
+    $sql = "SELECT I.img FROM Person P INNER JOIN Image I ON P.personID = ? WHERE I.imgID = P.image";
+    $stmt = $conn->stmt_init();
+    if (!$stmt->prepare($sql)) {
+        echo "failed to prepare";
+    } else {
+        // bind 
+        $stmt->bind_param('b',$id);
+        
+        // execute
+        $stmt->execute();
+        
+        // process result
+        $stmt->bind_result($personIMG);
+        echo '<img src="data:image/jpeg;base64,'.base64_encode( $personIMG['image'] ).'"/>';
+    }
 
 	// Prepare SQL using Parameterized Form (Safe from SQL Injections)
     $sql = "SELECT P.personID, P.firstName, P.lastName, P.age, P.sex, P.ethnicity, P.date, P.heightWhenMissingInches, P.mostRecentWeightLbs, P.eyeColor, P.hairColor, MP.contactAgency, MP.phoneNumber, MP.details FROM Person P " . "INNER JOIN Missing_Person_Event_MissingPerson MP ON P.personID = MP.personID WHERE P.personID = ?";
