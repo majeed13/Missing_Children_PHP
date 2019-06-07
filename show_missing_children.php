@@ -57,10 +57,11 @@ require_once 'header.inc.php';
         $stmt->execute();
 		
 		// Process Results Using Cursor
-        $stmt->bind_result($personID, $firstName,$lastName,$age,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
+        $stmt->bind_result($personID,$firstName,$lastName,$age,$sex,$ethnicity,$date,$heightWhenMissingInches,$mostRecentWeightLbs,$eyeColor,$hairColor,$contactAgency,$phoneNumber,$details);
+
         echo "<div>";
         while ($stmt->fetch()) {
-            echo 'Name: ' . '<a href="show_missing_children.php?id='  . $personID . '">' . $firstName . ' ' . $lastName . '</a>' .'<br>' . 'Age: ' . $age . '<br>'. 'Sex: ' . $sex . '<br>' . 'Ethnicity: ' . $ethnicity . '<br>' . 'Date of Birth: ' . $date . '<br>' . 'Height when missing (inches): ' . $heightWhenMissingInches . '<br>' . 'Weight when missing (pounds): ' . $mostRecentWeightLbs . '<br>' . 'Eye Color: ' . $eyeColor . '<br>' . 'Hair Color: ' . $hairColor . '<br>' . 'Contact Agency: ' . $contactAgency . '<br>' . 'Contact Phone Number: ' . $phoneNumber . '<br>' . 'Additional Details: ' . $details;
+            echo 'Name: ' . '<a href="show_missing_children.php?id='  . $personID . '">' . $firstName . ' ' . (empty($lastName) ? 'Info Not Available' : $lastName) . '</a>' .'<br>' . 'Age: ' . (empty($age) ? 'Info Not Available' : $age) . '<br>'. 'Sex: ' . $sex . '<br>' . 'Ethnicity: ' . (empty($ethnicity) ? 'Info Not Available' : $ethnicity) . '<br>' . 'Date of Birth: ' . (empty($date) ? 'Info Not Available' : $date) . '<br>' . 'Height when missing (inches): ' . (empty($heightWhenMissingInches) ? 'Info Not Available' : $heightWhenMissingInches) . '<br>' . 'Weight when missing (pounds): ' . (empty($mostRecentWeightLbs) ? 'Info Not Available' : $mostRecentWeightLbs) . '<br>' . 'Eye Color: ' . $eyeColor . '<br>' . 'Hair Color: ' . (empty($hairColor) ? 'Info Not Available' : $hairColor) . '<br>' . 'Contact Agency: ' . $contactAgency . '<br>' . 'Contact Phone Number: ' . $phoneNumber . '<br>' . 'Additional Details: ' . $details;
         } 
         echo "</div>";
     ?>
