@@ -10,7 +10,7 @@ require_once 'config.inc.php';
 ?>
 <html>
 <head>
-    <title>Sample PHP Database Program</title>
+    <title>Missing Children Database</title>
     <link rel="stylesheet" href="base.css">
 </head>
 <body>
@@ -18,7 +18,7 @@ require_once 'config.inc.php';
 require_once 'header.inc.php';
 ?>
 <div>
-    <h2>Product Catalog</h2>
+    <h2>Partial List with 'm' or 'M' in first name</h2>
     <?php
     // Create connection
     $conn = new mysqli($servername, $username, $password, $database, $port);
@@ -29,7 +29,7 @@ require_once 'header.inc.php';
     }
 
 	// Prepare SQL
-    $sql = "SELECT P.personID, P.firstName, P.lastName FROM Person P INNER JOIN Missing_Person_Event_MissingPerson MP on P.personID = MP.personID WHERE P.firstName LIKE '%a%' ORDER BY P.lastName";
+    $sql = "SELECT P.personID, P.firstName, P.lastName FROM Person P INNER JOIN Missing_Person_Event_MissingPerson MP on P.personID = MP.personID WHERE P.firstName LIKE '%m%' ORDER BY P.lastName";
     $stmt = $conn->stmt_init();
     if (!$stmt->prepare($sql)) {
         echo "failed to prepare";
@@ -42,7 +42,7 @@ require_once 'header.inc.php';
 		// Process Results using Cursor
         $stmt->bind_result($personID,$firstName,$lastName);
         while ($stmt->fetch()) {
-            echo '<li>' $firstName . " " . $lastName '</li>';
+            echo '<li>' . $firstName . " " . $lastName . '</li>';
         }
     }
 
