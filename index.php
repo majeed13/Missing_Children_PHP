@@ -16,7 +16,11 @@ require_once 'header.inc.php';
 ?>
 <div>
     <h2>About</h2>
-    <div>Help us find these childrenP</div>
+    <div>Help us find these Missing Children</div>
+    <br>
+    <div>A php website developed for CSS475</div>
+    <br> 
+    <div>By: Mustafa Majeed, Bo Simmons, and Anthony Michael Waddell</div>
 </div>
 </body>
 </html>

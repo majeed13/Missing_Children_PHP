@@ -32,31 +32,46 @@ require_once 'header.inc.php';
 ?>
 <div>
     <h2>Show Missing Children</h2>
+    
     <?php
-
+    
     // Create connection
     $conn = new mysqli($servername, $username, $password, $database, $port);
 
     // Check connection
-    if ($conn->connect_error) {
+    if ($conn->connect_error) 
+    {
         die("Connection failed: " . $conn->connect_error);
     }
     
+    
     // print the image of the person
-    $sql = "SELECT I.img FROM Person P INNER JOIN Image I ON P.personID = ? WHERE I.imgID = P.image";
+    $sql = "SELECT I.path FROM Person P " . "INNER JOIN Image I ON P.image = I.imageID WHERE P.personID = ?";
+    
     $stmt = $conn->stmt_init();
-    if (!$stmt->prepare($sql)) {
+    
+    if (!$stmt->prepare($sql)) 
+    {
         echo "failed to prepare";
     } else {
         // bind 
-        $stmt->bind_param('b',$id);
+        $stmt->bind_param('s',$id);
         
         // execute
         $stmt->execute();
         
         // process result
-        $stmt->bind_result($personIMG);
-        echo '<img src="data:image/jpeg;base64,'.base64_encode( $personIMG['image'] ).'"/>';
+        $stmt->bind_result( $imgPath );
+       
+        	while ( $stmt->fetch() )
+        	{
+        		if ( empty($imgPath) )
+        			echo '[NO PICTURE AVAILABLE]';
+        		else
+        			echo "<img src='$imgPath' style='width:300px;height:300px;'><br>";
+        	}
+        
+        
     }
 
 	// Prepare SQL using Parameterized Form (Safe from SQL Injections)
